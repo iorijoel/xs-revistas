@@ -1,0 +1,85 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context="com.example.diez.ojs.Fragment_inicio">
+
+    //principal
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            //contenedor de todos
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                //inicia check para idioma
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/gruporadioidioma"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/idiomaespa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/español" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/idiomaingl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ingles" />
+                    </RadioGroup>
+                </LinearLayout>
+                //fin check idioma
+
+                //para mostrar revistas con un reclycre
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_revistas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                //fin reclycre
+
+                //Fragment_inicio botones adiciones para ir a algun lado
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/todos_los_numeros" />
+
+                    <Button
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/instrucciones_para_autores" />
+                </LinearLayout>
+                //fin botones adiciones para ir a algun lado
+            </LinearLayout>
+    </ScrollView>
+</FrameLayout>

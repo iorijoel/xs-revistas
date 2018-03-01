@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">REVISTAS</string>
+    <string name="Fragment_inicio">Inicio</string>
+    <string name="ultimo_numero">Ultimo número</string>
+    <string name="todos_los_numeros">Todos los números</string>
+    <string name="comite_editorial">Comité editorial</string>
+    <string name="instrucciones_para_autores">Instrucciones para autores</string>
+    <string name="indexaciones">Indexaciones</string>
+    <string name="anuncios">Anuncios</string>
+    <string name="contactos">Contactos</string>
+    <string name="acerca_de">Acerca de..</string>
+    <string name="usuario_invitado">USUARIO INVITADO</string>
+    <string name="español">Español</string>
+    <string name="ingles">English</string>
+    <string name="otras_opciones">Otras opciones</string>
+    <string name="iniciar_sesion">INICIAR SESIÓN</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">hoLA FRAGMENT</string>
+
+    //todos los volumenes
+    <string name="strvolumen">Volumen: </string>
+    <string name="strnumero">Número: </string>
+    <string name="strfecha_publicacion">Fecha de publicación: </string>
+    <string name="strperiodo">Periodo: </string>
+
+    //todos los articulos
+    <string name="strautores">Autores: </string>
+    <string name="strpaginas">Páginas: </string>
+
+    //Para articulo
+    <string name="descargarpdf">DESCARGAR PDF</string>
+    <string name="palabras_claves">Palabras claves</string>
+    <string name="strresumen">Resumen</string>
+
+</resources>

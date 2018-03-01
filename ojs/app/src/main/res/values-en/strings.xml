@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JOURNALS</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Fragment_inicio">Main</string>
+    <string name="ultimo_numero">Last number</string>
+    <string name="todos_los_numeros">All numbers</string>
+    <string name="comite_editorial">Editorial committee</string>
+    <string name="instrucciones_para_autores">Instructions for authors</string>
+    <string name="indexaciones">Indexations</string>
+    <string name="anuncios">Advertisements</string>
+    <string name="contactos">Contacts</string>
+    <string name="acerca_de">About..</string>
+    <string name="usuario_invitado">GUEST USER</string>
+    <string name="otras_opciones">Other options</string>
+    <string name="español">Español</string>
+    <string name="ingles">English</string>
+    <string name="iniciar_sesion">LOGIN</string>
+
+
+    //todos los volumenes
+    <string name="strvolumen">Volume: </string>
+    <string name="strnumero">Number: </string>
+    <string name="strfecha_publicacion">Publication date: </string>
+    <string name="strperiodo">Period: </string>
+
+    //todos los articulos
+    <string name="strautores">Authors: </string>
+    <string name="strpaginas">Pages: </string>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_seccion_1"
+            android:icon="@drawable/ic_items"
+            android:title="@string/Fragment_inicio"/>
+        <item
+            android:id="@+id/menu_seccion_2"
+            android:icon="@drawable/ic_items"
+            android:title="@string/ultimo_numero"/>
+        <item
+            android:id="@+id/menu_seccion_3"
+            android:icon="@drawable/ic_items"
+            android:title="@string/todos_los_numeros"/>
+    </group>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="@string/otras_opciones">
+        <menu>
+            <item
+                android:id="@+id/menu_opcion_1"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/comite_editorial"/>
+            <item
+                android:id="@+id/menu_opcion_2"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/instrucciones_para_autores"/>
+            <item
+                android:id="@+id/menu_opcion_3"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/indexaciones"/>
+            <item
+                android:id="@+id/menu_opcion_4"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/anuncios"/>
+            <item
+                android:id="@+id/menu_opcion_5"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/contactos"/>
+            <item
+                android:id="@+id/menu_opcion_6"
+                android:icon="@drawable/ic_items_sec"
+                android:title="@string/acerca_de"/>
+        </menu>
+    </item>
+</menu>
+
