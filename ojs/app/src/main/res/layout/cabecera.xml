@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+//centrercop y era nav
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/navheader" />
+            android:rotation="0"
+            android:scaleType="matrix"
+            android:src="@drawable/fondomenu" />
 
         <TextView
             android:id="@+id/textView"
