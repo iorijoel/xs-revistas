@@ -6,14 +6,24 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+
+
 
 import com.example.diez.ojs.webService.Asynchtask;
 import com.example.diez.ojs.webService.WebService;
@@ -34,12 +44,13 @@ import java.util.Map;
  */
 public class Fragment_inicio extends Fragment implements Asynchtask{
     //para rv crd
-    private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
-    private RVARevistasAdapter adapter;
-    private List<Revistas> revistas =new ArrayList<>();
+    //private RecyclerView recyclerView;
+    //private GridLayoutManager gridLayoutManager;
+    //private RVARevistasAdapter adapter;
+    //private List<Revistas> revistas =new ArrayList<>();
     View view;
     //para localidad - cambio de idioma
+
     private Locale locale;
     private Configuration config = new Configuration();
 
@@ -83,7 +94,8 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
             }
         });
         //para mostar las revistas
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_revistas);
+        //recyclerView = (RecyclerView) view.findViewById(R.id.rv_revistas);
+
         ConectWSrevistas();
         return view;
     }
@@ -95,18 +107,50 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
     }
 
     @Override
-    public void processFinish(String result)  throws JSONException {
+    public void processFinish(String result) throws JSONException {
+
         JSONObject jsonJournal = new JSONObject(result);
         JSONArray jsonArrayJournal = jsonJournal.getJSONArray("revistas");
-        for(int i=0; i< jsonArrayJournal.length();i++)
+
+        Revistas[] ListaRevistas=new Revistas[jsonArrayJournal.length()];
+        for (  int i=0;i<jsonArrayJournal.length();i++)
         {
-            JSONObject objJournal = jsonArrayJournal.getJSONObject(i);
-            Revistas data= new Revistas(objJournal.getString("nombre"),objJournal.getString("img"),objJournal.getString("url"));
-            revistas.add(data);
+            JSONObject objJournal=jsonArrayJournal.getJSONObject(i);
+            ListaRevistas[i]=new Revistas(objJournal.getString("nombre"),objJournal.getString("img"),objJournal.getString("url"));
         }
-        gridLayoutManager = new GridLayoutManager(view.getContext(),1);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        adapter = new RVARevistasAdapter(view.getContext(),revistas);
-        recyclerView.setAdapter(adapter);
+
+        RVARevistasAdapter adaptadorRevistas =new RVARevistasAdapter(view.getContext(),ListaRevistas);
+
+        ListView lisOpciones=(ListView) view.findViewById(R.id.lv_revistas);
+
+        lisOpciones.setAdapter(adaptadorRevistas);
+
+        lisOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+
+                Bundle b = new Bundle();
+                String idrevista=((Revistas)a.getItemAtPosition(position)).getImagen().toString();
+                String nombrerevista=((Revistas)a.getItemAtPosition(position)).getNombre().toString();
+
+                b.putString("nombrerevista",nombrerevista);
+                b.putString("idrevista",idrevista);
+                /*         Toast toast1 =
+                        Toast.makeText(view.getContext(),"hola", Toast.LENGTH_SHORT);
+                        toast1.show();
+                */
+                Fragment_todos_los_numeros fragment = Fragment_todos_los_numeros.newInstance(b);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();
+
+            }
+        });
+
+
     }
+
+
+
+
 }

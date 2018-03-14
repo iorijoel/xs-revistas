@@ -60,14 +60,15 @@ public class Fragment_articulos extends Fragment implements Asynchtask {
 
     private void ConectWSArticulos() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://www.json-generator.com/api/json/get/cgiaoaFBNK?indent=2", datos,view.getContext(),Fragment_articulos.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/WsRevista/obtener_articulos.php", datos,view.getContext(),Fragment_articulos.this);
+        //WebService ws= new WebService("http://www.json-generator.com/api/json/get/cgiaoaFBNK?indent=2", datos,view.getContext(),Fragment_articulos.this);
         ws.execute("");
     }
 
     @Override
     public void processFinish(String result)  throws JSONException {
         JSONObject jsonArticulos = new JSONObject(result);
-        JSONArray jsonArrayArticulos= jsonArticulos.getJSONArray("articulos");
+        JSONArray jsonArrayArticulos= jsonArticulos.getJSONArray("metas");
         for(int i=0; i< jsonArrayArticulos.length();i++)
         {
             JSONObject objArticulo = jsonArrayArticulos.getJSONObject(i);

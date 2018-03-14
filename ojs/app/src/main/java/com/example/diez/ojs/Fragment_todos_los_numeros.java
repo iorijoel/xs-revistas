@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.diez.ojs.webService.Asynchtask;
 import com.example.diez.ojs.webService.WebService;
@@ -37,6 +38,14 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         // Required empty public constructor
     }
 
+    //para pasar informacion por bundle desde el otro fragment
+    public static Fragment_todos_los_numeros newInstance(Bundle arguments){
+        Fragment_todos_los_numeros f = new Fragment_todos_los_numeros();
+        if(arguments != null){
+            f.setArguments(arguments);
+        }
+        return f;
+    }
 
 
     @Override
@@ -48,26 +57,36 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         text.setTextAlignment(TextAlignment.JUSTIFIED);*/
         //text.setText(Html.fromHtml("<h2>titulo</2><br><br><p>hola buenos dias ajsdhgjashd</p>"));
 
+        //Bundle bundle = getActivity().getIntent().getExtras();
 
+        Bundle bundle =getArguments();
+
+        String nombrerevista,idrevista;
+
+        //Cogemos  los datos enviados
+        nombrerevista =bundle.getString("nombrerevista");
+        idrevista =bundle.getString("idrevista");
+
+        Toast toast1 =
+                Toast.makeText(view.getContext(),"revista"+nombrerevista+"id: "+idrevista, Toast.LENGTH_LONG);
+        toast1.show();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_todos_los_numeros);
         ConectWSIssue();
-
         return view;
-
-
     }
 
     private void ConectWSIssue() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://www.json-generator.com/api/json/get/bUXOmoZJwy?indent=2", datos,view.getContext(),Fragment_todos_los_numeros.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/WsRevista/obtener_todos_numeros.php", datos,view.getContext(),Fragment_todos_los_numeros.this);
+        //WebService ws= new WebService("http://www.json-generator.com/api/json/get/bUXOmoZJwy?indent=2", datos,view.getContext(),Fragment_todos_los_numeros.this);
         ws.execute("");
     }
 
     @Override
     public void processFinish(String result)  throws JSONException {
         JSONObject jsonIssues = new JSONObject(result);
-        JSONArray jsonArrayIssues = jsonIssues.getJSONArray("volumenes");
+        JSONArray jsonArrayIssues = jsonIssues.getJSONArray("metas");
         for(int i=0; i< jsonArrayIssues.length();i++)
         {
             JSONObject objIssue = jsonArrayIssues.getJSONObject(i);

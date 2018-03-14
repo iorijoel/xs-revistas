@@ -68,12 +68,11 @@ public class WebService extends AsyncTask<String, Long, String> {
     @Override
     protected String doInBackground(String... params) {
         try {
-            String r=HttpRequest.post(this.url).form(this.datos).body();
+            String r=HttpRequest.get(this.url).form(this.datos).body();
             return r;
 
         } catch (HttpRequestException exception) {
             Log.e("doInBackground", exception.getMessage());
-
             return "Error HttpRequestException";
         } catch (Exception e) {
             Log.e("doInBackground", e.getMessage());
