@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -44,17 +45,14 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_inicio extends Fragment implements Asynchtask{
-    //para rv crd
-    //private RecyclerView recyclerView;
-    //private GridLayoutManager gridLayoutManager;
-    //private RVARevistasAdapter adapter;
-    //private List<Revistas> revistas =new ArrayList<>();
+
     View view;
     //para localidad - cambio de idioma
+    globales global;
 
     private Locale locale;
     private Configuration config = new Configuration();
-    private String idioma,imagenrevista;
+    private String imagenrevista;
 
     public Fragment_inicio() {
         // Required empty public constructor
@@ -64,9 +62,11 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
 
         view = inflater.inflate(R.layout.fragment_inicio, container, false);
+        global =(globales)getActivity().getApplicationContext();//contexto de la clase global
 
         //no mostrar menu
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.app_name);
 
 
         RadioButton rbesp = (RadioButton) view.findViewById(R.id.idiomaespa);
@@ -74,14 +74,14 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
 
         if (Locale.getDefault().getDisplayLanguage().toString().equals("español")){
             rbesp.setChecked(true);
-            idioma="es_ES";
+            global.setIdioma("es_ES");
+
         }else if (Locale.getDefault().getDisplayLanguage().toString().equals("English")){
             rbing.setChecked(true);
-            idioma="en_US";
+            global.setIdioma("en_US");
         }
 
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.gruporadioidioma);
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -101,16 +101,13 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
                 startActivity(refresh);
             }
         });
-        //para mostar las revistas
-        //recyclerView = (RecyclerView) view.findViewById(R.id.rv_revistas);
-
         ConectWSrevistas();
         return view;
     }
 
     private void ConectWSrevistas() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://revistas.uteq.edu.ec/wsFinal/obtenerRevistas.php?locale="+idioma+"", datos,view.getContext(),Fragment_inicio.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/wsFinal/obtenerRevistas.php?locale="+global.getIdioma()+"", datos,view.getContext(),Fragment_inicio.this);
         ws.execute("");
     }
 
@@ -119,18 +116,14 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
 
         JSONObject jsonJournal = new JSONObject(result);
         JSONArray jsonArrayJournal = jsonJournal.getJSONArray("Revistas");
-
         Revistas[] ListaRevistas=new Revistas[jsonArrayJournal.length()];
         for (  int i=0;i<jsonArrayJournal.length();i++)
         {
-
             JSONObject objJournal=jsonArrayJournal.getJSONObject(i);
-
             //buscar obtener de otra forma la imagen de las revistas
             String idrev=objJournal.getString("id");
             String uno="1";
             String dos="2";
-
             if (idrev.equals(dos))
             {
                 imagenrevista="http://revistas.uteq.edu.ec/public/journals/2/journalThumbnail_es_ES.jpg";
@@ -138,35 +131,21 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
             {
                 imagenrevista="http://revistas.uteq.edu.ec/public/journals/1/journalThumbnail_es_ES.png";
             }
-
             ListaRevistas[i]=new Revistas(objJournal.getString("id"),objJournal.getString("nombre"),imagenrevista,objJournal.getString("descrip"));
         }
 
         RVARevistasAdapter adaptadorRevistas =new RVARevistasAdapter(view.getContext(),ListaRevistas);
-
         ListView lisOpciones=(ListView) view.findViewById(R.id.lv_revistas);
-
         lisOpciones.setAdapter(adaptadorRevistas);
-
         lisOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 
-                Bundle b = new Bundle();
-                /*String idrevista=((Revistas)a.getItemAtPosition(position)).getIdrevista().toString();
-                String nombrerevista=((Revistas)a.getItemAtPosition(position)).getNombre().toString();*/
-
-                b.putString("idrevista",((Revistas)a.getItemAtPosition(position)).getIdrevista().toString());
-                b.putString("idioma",idioma);
-                /*         Toast toast1 =
-                        Toast.makeText(view.getContext(),"hola", Toast.LENGTH_SHORT);
-                        toast1.show();
-                */
-                Fragment_todos_los_numeros fragment = Fragment_todos_los_numeros.newInstance(b);
+                global.setIdrevista(((Revistas)a.getItemAtPosition(position)).getIdrevista().toString());
+                global.setNombrerevista(((Revistas)a.getItemAtPosition(position)).getNombre().toString());
+                Fragment_todos_los_numeros fragment = new Fragment_todos_los_numeros();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, fragment);
+                ft.replace(R.id.content_frame, fragment).addToBackStack(null);
                 ft.commit();
-
             }
         });
 

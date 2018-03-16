@@ -25,6 +25,9 @@
     <string name="strperiodo">Period: </string>
 
     //todos los articulos
+    <string name="descargarpdf">DOWNLOAD PDF</string>
+    <string name="verpdf">VIEW PDF</string>
+    <string name="palabras_claves">Keywords</string>
     <string name="strautores">Authors: </string>
     <string name="strpaginas">Pages: </string>
 </resources>

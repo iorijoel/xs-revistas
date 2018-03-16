@@ -6,11 +6,11 @@
 
 
     //principal
-    <ScrollView
+<!--    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        //contenedor de todos</ScrollView>
+        //contenedor de todos</ScrollView>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,12 +24,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
-        //inicio recycler
-        <!--            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_articulos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />-->
-        //fin reclycler
     </LinearLayout>
 
 </FrameLayout>

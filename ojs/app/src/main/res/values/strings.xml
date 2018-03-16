@@ -30,6 +30,7 @@
 
     //Para articulo
     <string name="descargarpdf">DESCARGAR PDF</string>
+    <string name="verpdf">VER PDF</string>
     <string name="palabras_claves">Palabras claves</string>
     <string name="strresumen">Resumen</string>
 

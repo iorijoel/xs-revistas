@@ -1,6 +1,5 @@
 package com.example.diez.ojs;
 
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +13,8 @@ import android.view.MenuItem;
 //implements Asynchtask-ya no es aqui - si no en fragment
 public class MainActivity extends AppCompatActivity  {
 
+    globales global;
+
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navView;
@@ -24,16 +25,17 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
 
+        global =(globales) getApplicationContext();
+
         //comineza nav
-       toolbar = (Toolbar) findViewById(R.id.appbar);
+        toolbar = (Toolbar) findViewById(R.id.appbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);//no se muesta el menu
+        getSupportActionBar().setTitle(R.string.app_name);
 
         navView = (NavigationView)findViewById(R.id.navview);
-
-
         //aqui termina nav
 
         final Fragment_inicio fragmentInicio = new Fragment_inicio();
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
                         }
                         if(fragmentTransaction) {
                             getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_frame, fragment)
+                                    .replace(R.id.content_frame, fragment).addToBackStack(null)
                                     .commit();
                             menuItem.setChecked(true);
                             getSupportActionBar().setTitle(menuItem.getTitle());
@@ -84,6 +86,15 @@ public class MainActivity extends AppCompatActivity  {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
         }
     }
 }

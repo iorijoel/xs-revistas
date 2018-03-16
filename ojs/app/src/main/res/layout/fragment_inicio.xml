@@ -6,9 +6,7 @@
     tools:context="com.example.diez.ojs.Fragment_inicio">
 
     //principal
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
             //contenedor de todos
             <LinearLayout
@@ -48,6 +46,10 @@
                 </LinearLayout>
                 //fin check idioma
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                 //para mostrar revistas con un reclycre
 
                 <LinearLayout
@@ -57,13 +59,11 @@
                     android:orientation="horizontal">
 
 
-
-
-                        <ListView
-                            android:id="@+id/lv_revistas"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"/>
+                    <ListView
+                        android:id="@+id/lv_revistas"
+                        android:layout_width="match_parent"
+                        android:layout_height="523dp"
+                        android:layout_gravity="center" />
 
 
                     <!--                    <android.support.v7.widget.RecyclerView
@@ -74,13 +74,16 @@
 
                 </LinearLayout>
                 //fin reclycre
+                </ScrollView>
 
                 //Fragment_inicio botones adiciones para ir a algun lado
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="invisible">
 
                     <Button
                         android:layout_width="300dp"
@@ -94,5 +97,5 @@
                 </LinearLayout>
                 //fin botones adiciones para ir a algun lado
             </LinearLayout>
-    </ScrollView>
+
 </FrameLayout>
