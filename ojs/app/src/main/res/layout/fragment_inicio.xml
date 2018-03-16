@@ -49,6 +49,7 @@
                 //fin check idioma
 
                 //para mostrar revistas con un reclycre
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -56,19 +57,19 @@
                     android:orientation="horizontal">
 
 
-                    <ListView
-                        android:id="@+id/lv_revistas"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
 
 
-<!--                    <android.support.v7.widget.RecyclerView
+                        <ListView
+                            android:id="@+id/lv_revistas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"/>
+
+
+                    <!--                    <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_revistas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />-->
-
 
 
                 </LinearLayout>

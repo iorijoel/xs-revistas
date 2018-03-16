@@ -12,19 +12,27 @@
         //contenedor de todos
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
 
-            //inicio recycler
+        <!--            //inicio recycler
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_todos_los_numeros"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-                //fin reclycler
-        </LinearLayout>
-    </ScrollView>
+                //fin reclycler-->
+
+        <ListView
+            android:id="@+id/lv_todoslosnumeros"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
 </FrameLayout>

@@ -23,11 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Fragment_inicio" />
+<!--        <activity android:name=".Fragment_inicio" />
 
-        <activity android:name=".Fragment_todos_los_numeros" />
-
-
+        <activity android:name=".Fragment_todos_los_numeros" />-->
         <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
 
     </application>

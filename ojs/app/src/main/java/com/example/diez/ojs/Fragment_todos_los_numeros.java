@@ -2,12 +2,15 @@ package com.example.diez.ojs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//ESTO ES PARA TODOS LOS NUMEROS
 
 public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
 
-    private RecyclerView recyclerView;
+/*    private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private RVAIssuesAdapter adapter;
-    private List<Issue> issue=new ArrayList<>();
+    private List<Issue> issue=new ArrayList<>();*/
 
     View view;
     TextView text;
@@ -68,10 +72,11 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         idrevista =bundle.getString("idrevista");
 
         Toast toast1 =
-                Toast.makeText(view.getContext(),"revista"+nombrerevista+"id: "+idrevista, Toast.LENGTH_LONG);
+                Toast.makeText(view.getContext(),"revista "+nombrerevista+"    id: "+idrevista, Toast.LENGTH_LONG);
         toast1.show();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_todos_los_numeros);
+
+        //recyclerView = (RecyclerView) view.findViewById(R.id.rv_todos_los_numeros);
         ConectWSIssue();
         return view;
     }
@@ -83,9 +88,9 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         ws.execute("");
     }
 
-    @Override
+   @Override
     public void processFinish(String result)  throws JSONException {
-        JSONObject jsonIssues = new JSONObject(result);
+/*        JSONObject jsonIssues = new JSONObject(result);
         JSONArray jsonArrayIssues = jsonIssues.getJSONArray("metas");
         for(int i=0; i< jsonArrayIssues.length();i++)
         {
@@ -97,7 +102,55 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         gridLayoutManager = new GridLayoutManager(view.getContext(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new RVAIssuesAdapter(view.getContext(),issue);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
+
+        //nuevo - con listview
+
+       JSONObject jsonIssues = new JSONObject(result);
+       JSONArray jsonArrayIssues = jsonIssues.getJSONArray("metas");
+
+       Issue[] ListaIssues=new Issue[jsonArrayIssues.length()];
+       for (  int i=0;i<jsonArrayIssues.length();i++)
+       {
+           JSONObject objIssue=jsonArrayIssues.getJSONObject(i);
+           ListaIssues[i]=new Issue(objIssue.getString("id"),objIssue.getString("id"),objIssue.getString("volumen"),objIssue.getString("numero"),objIssue.getString("year"),
+                   objIssue.getString("fechapublicidad"),"http://revistas.uteq.edu.ec//public//journals//1//"+objIssue.getString("imagen"),objIssue.getString("titulo"));
+       }
+
+       RVAIssuesAdapter adaptadorIssues =new RVAIssuesAdapter(view.getContext(),ListaIssues);
+
+       ListView lisOpciones=(ListView) view.findViewById(R.id.lv_todoslosnumeros);
+
+       lisOpciones.setAdapter(adaptadorIssues);
+
+       lisOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+           public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+
+               Bundle b = new Bundle();
+               String volumen=((Issue)a.getItemAtPosition(position)).getVolumen().toString();
+               String numero=((Issue)a.getItemAtPosition(position)).getNumero().toString();
+               String imagen="http://revistas.uteq.edu.ec//public//journals//1//"+((Issue)a.getItemAtPosition(position)).getImagen().toString();
+
+
+               b.putString("volumen",volumen);
+               b.putString("numero",numero);
+               b.putString("imagen",imagen);
+                /*         Toast toast1 =
+                        Toast.makeText(view.getContext(),"hola", Toast.LENGTH_SHORT);
+                        toast1.show();
+                */
+               Fragment_articulos fragment = Fragment_articulos.newInstance(b);
+               FragmentTransaction ft = getFragmentManager().beginTransaction();
+               ft.replace(R.id.content_frame, fragment);
+               ft.commit();
+
+           }
+       });
+
+
+
+
     }
 
 }

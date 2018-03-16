@@ -4,6 +4,8 @@ package com.example.diez.ojs;
  * Created by joel_ on 15/2/2018.
  */
 
+//ESTO ES PARA TODOS LOS NUMEROS
+
 public class Issue {
 
     String idrevista;
