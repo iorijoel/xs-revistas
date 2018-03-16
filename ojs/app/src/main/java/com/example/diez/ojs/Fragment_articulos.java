@@ -32,14 +32,9 @@ import java.util.Map;
  */
 public class Fragment_articulos extends Fragment implements Asynchtask {
 
-
-    private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
-    private RVAArticulosAdapter adapter;
-    private List<Articulos> articulos=new ArrayList<>();
+    String idioma,idissue,imagenissue;
 
     View view;
-    //TextView text;
 
     public Fragment_articulos() {
         // Required empty public constructor
@@ -66,16 +61,18 @@ public class Fragment_articulos extends Fragment implements Asynchtask {
 
         Bundle bundle =getArguments();
 
-        String volumen,numero,imagen;
+
 
         //Cogemos  los datos enviados
-        volumen=bundle.getString("volumen");
-        numero =bundle.getString("numero");
-        imagen=bundle.getString("imagen");
+        idioma=bundle.getString("idioma");
+        idissue =bundle.getString("idissue");
+        imagenissue=bundle.getString("imagenissue");
 
+/*
         Toast toast1 =
                 Toast.makeText(view.getContext(),"volumen "+volumen+"    Num: "+numero+"  Imagen:"+imagen, Toast.LENGTH_LONG);
         toast1.show();
+*/
 
 
         //recyclerView = (RecyclerView) view.findViewById(R.id.rv_articulos);
@@ -87,34 +84,21 @@ public class Fragment_articulos extends Fragment implements Asynchtask {
 
     private void ConectWSArticulos() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://revistas.uteq.edu.ec/WsRevista/obtener_articulos.php", datos,view.getContext(),Fragment_articulos.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/wsFinal/obtenerListadoArticulos.php?locale="+idioma+"&issue="+idissue+"", datos,view.getContext(),Fragment_articulos.this);
         //WebService ws= new WebService("http://www.json-generator.com/api/json/get/cgiaoaFBNK?indent=2", datos,view.getContext(),Fragment_articulos.this);
         ws.execute("");
     }
 
     @Override
     public void processFinish(String result)  throws JSONException {
-/*        JSONObject jsonArticulos = new JSONObject(result);
-        JSONArray jsonArrayArticulos= jsonArticulos.getJSONArray("metas");
-        for(int i=0; i< jsonArrayArticulos.length();i++)
-        {
-            JSONObject objArticulo = jsonArrayArticulos.getJSONObject(i);
-            Articulos data= new Articulos(objArticulo.getString("id"),objArticulo.getString("title"),objArticulo.getString("last_name"),objArticulo.getString("pages"),objArticulo.getString("last_name"));
-            articulos.add(data);
-        }
-        gridLayoutManager = new GridLayoutManager(view.getContext(),1);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        adapter = new RVAArticulosAdapter(view.getContext(),articulos);
-        recyclerView.setAdapter(adapter);
-    }*/
 
         JSONObject jsonArticulos = new JSONObject(result);
-        JSONArray jsonArrayArticulos = jsonArticulos.getJSONArray("metas");
+        JSONArray jsonArrayArticulos = jsonArticulos.getJSONArray("listaArticulos");
 
         Articulos[] ListaArticulos = new Articulos[jsonArrayArticulos.length()];
         for (int i = 0; i < jsonArrayArticulos.length(); i++) {
             JSONObject objArticulo = jsonArrayArticulos.getJSONObject(i);
-            ListaArticulos[i] = new Articulos(objArticulo.getString("id"),objArticulo.getString("title"),objArticulo.getString("last_name"),objArticulo.getString("pages"),objArticulo.getString("last_name"));
+            ListaArticulos[i] = new Articulos(objArticulo.getString("id"),objArticulo.getString("title"),objArticulo.getString("autores"),objArticulo.getString("pages"),imagenissue);
         }
 
         RVAArticulosAdapter adaptadorArticulos = new RVAArticulosAdapter(view.getContext(), ListaArticulos);

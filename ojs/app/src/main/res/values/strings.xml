@@ -21,7 +21,7 @@
     //todos los volumenes
     <string name="strvolumen">Volumen: </string>
     <string name="strnumero">Número: </string>
-    <string name="strfecha_publicacion">Fecha de publicación: </string>
+    <string name="strfecha_publicacion">F. publicación: </string>
     <string name="strperiodo">Periodo: </string>
 
     //todos los articulos

@@ -3,8 +3,10 @@ package com.example.diez.ojs;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +32,8 @@ import java.util.Map;
 
 public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
 
-/*    private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
-    private RVAIssuesAdapter adapter;
-    private List<Issue> issue=new ArrayList<>();*/
-
+    String idrevista,idioma;
+    Toolbar toolbar;
     View view;
     TextView text;
 
@@ -57,23 +56,17 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
                              Bundle savedInstanceState) {
         view =inflater.inflate(R.layout.fragment_todos_los_numeros, container, false);
 
-       /* text = view.findViewById(R.id.htmlprueba);
-        text.setTextAlignment(TextAlignment.JUSTIFIED);*/
-        //text.setText(Html.fromHtml("<h2>titulo</2><br><br><p>hola buenos dias ajsdhgjashd</p>"));
-
-        //Bundle bundle = getActivity().getIntent().getExtras();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle =getArguments();
 
-        String nombrerevista,idrevista;
-
         //Cogemos  los datos enviados
-        nombrerevista =bundle.getString("nombrerevista");
         idrevista =bundle.getString("idrevista");
+        idioma =bundle.getString("idioma");
 
-        Toast toast1 =
+/*        Toast toast1 =
                 Toast.makeText(view.getContext(),"revista "+nombrerevista+"    id: "+idrevista, Toast.LENGTH_LONG);
-        toast1.show();
+        toast1.show();*/
 
 
         //recyclerView = (RecyclerView) view.findViewById(R.id.rv_todos_los_numeros);
@@ -83,7 +76,7 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
 
     private void ConectWSIssue() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://revistas.uteq.edu.ec/WsRevista/obtener_todos_numeros.php", datos,view.getContext(),Fragment_todos_los_numeros.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/wsFinal/obtenertodosnumeros.php?journal_id="+idrevista+"&locale="+idioma+"", datos,view.getContext(),Fragment_todos_los_numeros.this);
         //WebService ws= new WebService("http://www.json-generator.com/api/json/get/bUXOmoZJwy?indent=2", datos,view.getContext(),Fragment_todos_los_numeros.this);
         ws.execute("");
     }
@@ -107,14 +100,14 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
         //nuevo - con listview
 
        JSONObject jsonIssues = new JSONObject(result);
-       JSONArray jsonArrayIssues = jsonIssues.getJSONArray("metas");
+       JSONArray jsonArrayIssues = jsonIssues.getJSONArray("todosLosNumeros");
 
        Issue[] ListaIssues=new Issue[jsonArrayIssues.length()];
        for (  int i=0;i<jsonArrayIssues.length();i++)
        {
            JSONObject objIssue=jsonArrayIssues.getJSONObject(i);
-           ListaIssues[i]=new Issue(objIssue.getString("id"),objIssue.getString("id"),objIssue.getString("volumen"),objIssue.getString("numero"),objIssue.getString("year"),
-                   objIssue.getString("fechapublicidad"),"http://revistas.uteq.edu.ec//public//journals//1//"+objIssue.getString("imagen"),objIssue.getString("titulo"));
+           ListaIssues[i]=new Issue(idrevista,objIssue.getString("id"),objIssue.getString("volumen"),objIssue.getString("numero"),objIssue.getString("year"),
+                   objIssue.getString("fechapublicidad"),"http://revistas.uteq.edu.ec//public//journals//"+idrevista+"//"+objIssue.getString("imagen"),objIssue.getString("periodo"));
        }
 
        RVAIssuesAdapter adaptadorIssues =new RVAIssuesAdapter(view.getContext(),ListaIssues);
@@ -128,14 +121,14 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 
                Bundle b = new Bundle();
-               String volumen=((Issue)a.getItemAtPosition(position)).getVolumen().toString();
+     /*          String volumen=((Issue)a.getItemAtPosition(position)).getVolumen().toString();
                String numero=((Issue)a.getItemAtPosition(position)).getNumero().toString();
-               String imagen="http://revistas.uteq.edu.ec//public//journals//1//"+((Issue)a.getItemAtPosition(position)).getImagen().toString();
+               String imagen="http://revistas.uteq.edu.ec//public//journals//"+idrevista+"//"+((Issue)a.getItemAtPosition(position)).getImagen().toString();*/
 
 
-               b.putString("volumen",volumen);
-               b.putString("numero",numero);
-               b.putString("imagen",imagen);
+               b.putString("idioma",idioma);
+               b.putString("idissue",((Issue)a.getItemAtPosition(position)).getIdissue().toString());
+               b.putString("imagenissue",((Issue)a.getItemAtPosition(position)).getImagen().toString());
                 /*         Toast toast1 =
                         Toast.makeText(view.getContext(),"hola", Toast.LENGTH_SHORT);
                         toast1.show();

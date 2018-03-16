@@ -5,14 +5,24 @@ package com.example.diez.ojs;
  */
 
 public class Revistas {
+    String idrevista;
     String nombre;
     String imagen;
     String descripcion;
 
-    public Revistas(String nombre, String imagen, String descripcion) {
+    public Revistas(String idrevista,String nombre, String imagen, String descripcion) {
+        this.idrevista = idrevista;
         this.nombre = nombre;
         this.imagen = imagen;
         this.descripcion = descripcion;
+    }
+
+    public String getIdrevista() {
+        return idrevista;
+    }
+
+    public void setIdrevista(String idrevista) {
+        this.idrevista = idrevista;
     }
 
     public String getNombre() {

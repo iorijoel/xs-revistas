@@ -23,13 +23,18 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.appbar);
+
+        //comineza nav
+       toolbar = (Toolbar) findViewById(R.id.appbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         navView = (NavigationView)findViewById(R.id.navview);
+
+
+        //aqui termina nav
 
         final Fragment_inicio fragmentInicio = new Fragment_inicio();
         getSupportFragmentManager().beginTransaction()

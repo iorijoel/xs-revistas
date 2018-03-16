@@ -73,8 +73,8 @@
                         android:paddingTop="0dp"
                         android:text="TITULO COMPUESTO"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="16sp"
-                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textStyle="normal|bold"
                         android:typeface="sans" />
 
                 </LinearLayout>

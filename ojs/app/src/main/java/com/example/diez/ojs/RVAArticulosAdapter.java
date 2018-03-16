@@ -42,8 +42,7 @@ public class RVAArticulosAdapter extends ArrayAdapter<Articulos> {
         autores.setText(getItem(position).getAutores());
         paginas.setText(getItem(position).getPaginas());
         Glide.with(this.getContext()).
-                load(getItem(position).
-                        getImagen()).
+                load(getItem(position).getImagen()).
                 into(imagen_articulo);
 
 /*

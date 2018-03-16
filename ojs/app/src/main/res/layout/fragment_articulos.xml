@@ -10,26 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        //contenedor de todos
-        <LinearLayout
+        //contenedor de todos</ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lv_Articulos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center" />
 
-            <ListView
-                android:id="@+id/lv_Articulos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
-
-            //inicio recycler
-<!--            <android.support.v7.widget.RecyclerView
+        //inicio recycler
+        <!--            <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_articulos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />-->
-            //fin reclycler
-        </LinearLayout>
-    </ScrollView>
+        //fin reclycler
+    </LinearLayout>
 
 </FrameLayout>

@@ -59,7 +59,6 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="5dp"
-                    android:text="test"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="12sp"
                     android:textStyle="normal"

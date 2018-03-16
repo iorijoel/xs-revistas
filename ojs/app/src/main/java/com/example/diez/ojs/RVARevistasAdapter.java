@@ -34,7 +34,7 @@ public class RVARevistasAdapter extends ArrayAdapter<Revistas> {
 
 
         nombre.setText(getItem(position).getNombre());
-        descripcion.setText(getItem(position).getDescripcion());
+        //descripcion.setText(getItem(position).getDescripcion());
         Glide.with(this.getContext()).
                 load(getItem(position).
                 getImagen()).

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
 
     private Locale locale;
     private Configuration config = new Configuration();
+    private String idioma,imagenrevista;
 
     public Fragment_inicio() {
         // Required empty public constructor
@@ -63,13 +65,19 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
 
         view = inflater.inflate(R.layout.fragment_inicio, container, false);
 
+        //no mostrar menu
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+
         RadioButton rbesp = (RadioButton) view.findViewById(R.id.idiomaespa);
         RadioButton rbing = (RadioButton) view.findViewById(R.id.idiomaingl);
 
         if (Locale.getDefault().getDisplayLanguage().toString().equals("español")){
             rbesp.setChecked(true);
+            idioma="es_ES";
         }else if (Locale.getDefault().getDisplayLanguage().toString().equals("English")){
             rbing.setChecked(true);
+            idioma="en_US";
         }
 
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.gruporadioidioma);
@@ -102,7 +110,7 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
 
     private void ConectWSrevistas() {
         Map<String, String> datos = new HashMap<String, String>();
-        WebService ws= new WebService("http://www.json-generator.com/api/json/get/crdjDxQwaG", datos,view.getContext(),Fragment_inicio.this);
+        WebService ws= new WebService("http://revistas.uteq.edu.ec/wsFinal/obtenerRevistas.php?locale="+idioma+"", datos,view.getContext(),Fragment_inicio.this);
         ws.execute("");
     }
 
@@ -110,13 +118,28 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
     public void processFinish(String result) throws JSONException {
 
         JSONObject jsonJournal = new JSONObject(result);
-        JSONArray jsonArrayJournal = jsonJournal.getJSONArray("revistas");
+        JSONArray jsonArrayJournal = jsonJournal.getJSONArray("Revistas");
 
         Revistas[] ListaRevistas=new Revistas[jsonArrayJournal.length()];
         for (  int i=0;i<jsonArrayJournal.length();i++)
         {
+
             JSONObject objJournal=jsonArrayJournal.getJSONObject(i);
-            ListaRevistas[i]=new Revistas(objJournal.getString("nombre"),objJournal.getString("img"),objJournal.getString("url"));
+
+            //buscar obtener de otra forma la imagen de las revistas
+            String idrev=objJournal.getString("id");
+            String uno="1";
+            String dos="2";
+
+            if (idrev.equals(dos))
+            {
+                imagenrevista="http://revistas.uteq.edu.ec/public/journals/2/journalThumbnail_es_ES.jpg";
+            }else if (idrev.equals(uno))
+            {
+                imagenrevista="http://revistas.uteq.edu.ec/public/journals/1/journalThumbnail_es_ES.png";
+            }
+
+            ListaRevistas[i]=new Revistas(objJournal.getString("id"),objJournal.getString("nombre"),imagenrevista,objJournal.getString("descrip"));
         }
 
         RVARevistasAdapter adaptadorRevistas =new RVARevistasAdapter(view.getContext(),ListaRevistas);
@@ -130,11 +153,11 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 
                 Bundle b = new Bundle();
-                String idrevista=((Revistas)a.getItemAtPosition(position)).getImagen().toString();
-                String nombrerevista=((Revistas)a.getItemAtPosition(position)).getNombre().toString();
+                /*String idrevista=((Revistas)a.getItemAtPosition(position)).getIdrevista().toString();
+                String nombrerevista=((Revistas)a.getItemAtPosition(position)).getNombre().toString();*/
 
-                b.putString("nombrerevista",nombrerevista);
-                b.putString("idrevista",idrevista);
+                b.putString("idrevista",((Revistas)a.getItemAtPosition(position)).getIdrevista().toString());
+                b.putString("idioma",idioma);
                 /*         Toast toast1 =
                         Toast.makeText(view.getContext(),"hola", Toast.LENGTH_SHORT);
                         toast1.show();
