@@ -16,11 +16,11 @@
                 android:orientation="vertical">
 
 
-                <TextView
+<!--                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Bienvenida"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"/>-->
 
                 //inicia check para idioma
 

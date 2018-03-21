@@ -15,5 +15,7 @@
         <item name="android:colorBackground">@color/colorBlanco</item>
     </style>
 
+    <style name="splash" parent="Theme.AppCompat.DayNight.NoActionBar"/>
+
 
 </resources>
