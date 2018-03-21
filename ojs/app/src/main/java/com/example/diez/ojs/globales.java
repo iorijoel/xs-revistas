@@ -14,6 +14,24 @@ public class globales extends Application {
     private String idissue;
     private String imagenissue;
     private String idSubmission;
+    private String UrlPdf;
+    private String abreviaturaRevista;
+
+    public String getUrlPdf() {
+        return UrlPdf;
+    }
+
+    public void setUrlPdf(String urlPdf) {
+        UrlPdf = urlPdf;
+    }
+
+    public String getAbreviaturaRevista() {
+        return abreviaturaRevista;
+    }
+
+    public void setAbreviaturaRevista(String abreviaturaRevista) {
+        this.abreviaturaRevista = abreviaturaRevista;
+    }
 
     public String getIdSubmission() {
         return idSubmission;

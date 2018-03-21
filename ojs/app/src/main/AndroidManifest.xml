@@ -5,6 +5,8 @@
     //android:configChanges="screenSize|orientation" es para no recargar en main cuando se voltea el telefono
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".globales"

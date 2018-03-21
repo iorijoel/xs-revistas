@@ -15,12 +15,21 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Bienvenida"
+                    android:gravity="center_horizontal"/>
+
                 //inicia check para idioma
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
+
 
                     <RadioGroup
                         android:id="@+id/gruporadioidioma"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">JOURNALS</string>
+    <string name="Bienvenida">Welcome, please to start select a language and the magazine of your interest.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Fragment_inicio">Main</string>
     <string name="ultimo_numero">Last number</string>
@@ -27,6 +28,7 @@
     //todos los articulos
     <string name="descargarpdf">DOWNLOAD PDF</string>
     <string name="verpdf">VIEW PDF</string>
+    <string name="strpublicado">Published</string>
     <string name="palabras_claves">Keywords</string>
     <string name="strautores">Authors: </string>
     <string name="strpaginas">Pages: </string>

@@ -148,11 +148,5 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
                 ft.commit();
             }
         });
-
-
     }
-
-
-
-
 }

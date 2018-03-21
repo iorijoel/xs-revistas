@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,20 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
 
         TextView cabec=(TextView) ((AppCompatActivity) getActivity()).findViewById(R.id.titulocabecera);
         cabec.setText(global.getNombrerevista());
+
+        ImageView imagenCabe=(ImageView) ((AppCompatActivity) getActivity()).findViewById(R.id.imageViewCabecera);
+        String uno="1";
+        if (global.getIdrevista().equals(uno))
+        {
+            imagenCabe.setImageDrawable(getResources().getDrawable(R.drawable.f));
+        }else
+        {
+            imagenCabe.setImageDrawable(getResources().getDrawable(R.drawable.l));
+        }
+
+
+
+
 
         ConectWSIssue();
         return view;

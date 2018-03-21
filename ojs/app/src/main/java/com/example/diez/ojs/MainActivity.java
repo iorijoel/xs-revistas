@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity  {
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_seccion_2:
-                                fragment = new Fragment_articulos();
+                                fragment = new Fragment_ultimo_numero();
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_seccion_3:
