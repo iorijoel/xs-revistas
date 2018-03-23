@@ -68,7 +68,6 @@ public class Fragment_inicio extends Fragment implements Asynchtask{
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.app_name);
 
-
         RadioButton rbesp = (RadioButton) view.findViewById(R.id.idiomaespa);
         RadioButton rbing = (RadioButton) view.findViewById(R.id.idiomaingl);
 

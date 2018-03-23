@@ -57,10 +57,6 @@ public class Fragment_todos_los_numeros extends Fragment implements Asynchtask {
             imagenCabe.setImageDrawable(getResources().getDrawable(R.drawable.l));
         }
 
-
-
-
-
         ConectWSIssue();
         return view;
     }

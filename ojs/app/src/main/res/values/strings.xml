@@ -36,5 +36,9 @@
     <string name="palabras_claves">Palabras claves</string>
     <string name="strresumen">Resumen</string>
 
+    //Para contacto
+    <string name="strnombre">NOMBRE</string>
+    <string name="strcorreo">CORREO</string>
+    <string name="strtelefono">TELEFONO</string>
 
 </resources>

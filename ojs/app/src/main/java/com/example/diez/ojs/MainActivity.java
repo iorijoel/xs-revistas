@@ -8,13 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 //implements Asynchtask-ya no es aqui - si no en fragment
 public class MainActivity extends AppCompatActivity  {
 
     globales global;
-
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navView;
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         global =(globales) getApplicationContext();
 
@@ -61,6 +60,42 @@ public class MainActivity extends AppCompatActivity  {
                                 break;
                             case R.id.menu_seccion_3:
                                 fragment = new Fragment_todos_los_numeros();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_1:
+                                String uno="1";
+                                if (global.getIdrevista().equals(uno))
+                                {
+                                    global.setUrlPdf("http://revistas.uteq.edu.ec/formatos/ComiteEditorialCyT.pdf");
+                                }else
+                                {
+                                    Toast toast1 =
+                                            Toast.makeText(getApplicationContext(),
+                                                    "LO SENTIMOS, ARCHIVO NO ENCONTRADO", Toast.LENGTH_SHORT);
+                                    toast1.show();
+                                    global.setUrlPdf("");
+                                }
+                                fragment = new FragmentVisorPdf();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_2:
+                                fragment = new Fragment_Instrucciones();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_3:
+                                fragment = new FragmentIndexaciones();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_4:
+                                fragment = new Fragment_Anuncios();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_5:
+                                fragment = new Fragment_Contactos();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_6:
+                                fragment = new Fragment_AcercaDe();
                                 fragmentTransaction = true;
                                 break;
                         }
